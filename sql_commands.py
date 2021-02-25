@@ -22,7 +22,7 @@ def create(command, database):
     if command[1] == 'table':
         return create_table(command, database)
     elif command[1] == 'database':
-        return create_database(command)
+        return create_database(command, database)
     else:
         raise Invalid_Command('Can only create a database or table.\n')
 
@@ -38,11 +38,11 @@ def drop(command, database):
     if command[1] == 'table':
         return drop_table(command, database)
     elif command[1] == 'database':
-        return drop_database(command)
+        return drop_database(command, database)
     else:
         raise Invalid_Command('Can only drop a database or table.\n')
 
-def create_database(command, **kwargs):
+def create_database(command, database):
     '''
     Function checks if the main databases directory exists and creates it if not.
     Then creates a folder for the specified data database
@@ -62,7 +62,7 @@ def create_database(command, **kwargs):
 
     print(f'Database {database_name} created.\n')
 
-    return None
+    return database
 
 def create_table(command, database):
     '''
@@ -110,7 +110,7 @@ def create_table(command, database):
     return database
 
 
-def drop_database(command, **kwargs):
+def drop_database(command, database):
     '''
     Function checks if databases exists and deletes it.
 
@@ -126,7 +126,7 @@ def drop_database(command, **kwargs):
 
     print(f'Database {database_name} deleted.\n')
 
-    return None
+    return database
 
 
 def drop_table(command, database):
